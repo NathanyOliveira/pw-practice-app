@@ -59,13 +59,20 @@ test('Locator sintax rules', async({page}) =>{
 })
 
 test('User facing locators', async({page}) => {
-await page.getByRole('textbox',{name: "Email"}).first().click()
-await page.getByRole('button', {name: "Sign"}).first().click()
-await page.getByLabel('Email').first().click()
-await page.getByPlaceholder('Jane Doe').click()
-await page.getByText('Using the grid').click()
-await page.getByTestId('SignIn').click()
-await page.getByText('IoT Dashboard').click()
+  await page.getByRole('textbox',{name: "Email"}).first().click()
+  await page.getByRole('button', {name: "Sign"}).first().click()
+  await page.getByLabel('Email').first().click()
+  await page.getByPlaceholder('Jane Doe').click()
+  await page.getByText('Using the grid').click()
+  await page.getByTestId('SignIn').click()
+  await page.getByText('IoT Dashboard').click()
 
 })
  
+test('locating child elements', async({page}) =>{
+  await page.locator('nb-card nb-radio :text-is("Option 1")').click()
+  await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2 ")').click()
+
+  await page.locator('nb-card').getByRole('button', {name: "Sign in"}).first().click()
+
+})
