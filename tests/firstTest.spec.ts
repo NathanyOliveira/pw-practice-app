@@ -74,5 +74,6 @@ test('locating child elements', async({page}) =>{
   await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2 ")').click()
 
   await page.locator('nb-card').getByRole('button', {name: "Sign in"}).first().click()
+  await page.locator('nb-card').nth(3).getByRole('button').click()
 
 })
