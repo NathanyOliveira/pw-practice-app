@@ -29,7 +29,7 @@ test.beforeEach(async ({ page }) => {
 //   })
 // })
 
-test('Locator sintax rules', async({page}) =>{
+test('locator sintax rules', async({page}) =>{
   //by Tag name
   //await page.locator('input').first().click()
 
@@ -58,7 +58,7 @@ test('Locator sintax rules', async({page}) =>{
   page.locator(':text-is("Using the Grid")')
 })
 
-test('User facing locators', async({page}) => {
+test('user facing locators', async({page}) => {
   await page.getByRole('textbox',{name: "Email"}).first().click()
   await page.getByRole('button', {name: "Sign"}).first().click()
   await page.getByLabel('Email').first().click()
@@ -92,7 +92,7 @@ test('locating parent elements', async({page}) =>{
   
 })
 
-test('Reusing the locators', async({page}) =>{
+test('reusing the locators', async({page}) =>{
 
   const basicForm = page.locator('nb-card').filter({hasText: "Basic form" })
   const emailField = basicForm.getByRole('textbox', {name: "Email"})
@@ -104,4 +104,8 @@ test('Reusing the locators', async({page}) =>{
   await basicForm.getByRole('button').click()
 
   await expect (emailField).toHaveValue('test@test.com')
+})
+
+test('extracting values', async({page}) => {
+
 })
