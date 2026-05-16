@@ -31,7 +31,7 @@ test.describe('Form Layouts page', () =>{
         await usingTheGridForm.getByRole('radio', {name: "Option 1"}).check({force:true})
         const radioStatus = await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()
         expect(radioStatus).toBeTruthy()
-        await expect(usingTheGridForm.getByRole('radio', {name: "Option 1"})).toBeChecked()
+        await expect(usingTheGridForm.getByRole('radio', {name: "Option 1"})).toBeChecked
 
         await usingTheGridForm.getByRole('radio', {name: "Option 2"}).check({force:true})
         expect(await usingTheGridForm.getByRole('radio', {name: "Option 1"}).isChecked()).toBeFalsy()
@@ -80,10 +80,18 @@ test.describe('Form Layouts page', () =>{
             await optionList.filter({hasText: color}).click()
             await expect(header).toHaveCSS('background-color', colors[color])
             if(color != "Corporate")
-            await dropdownMenu.click()
-
+                await dropdownMenu.click()
         }
+    })
 
-   
+    test('tooltips', async({page}) => {
+        await page.getByText('Modal & Overlays').click()
+        await page.getByText('Tooltip').click()
 
-})
+        const toolTipCard = page.locator('nb-card', {hasText: "Tooltip Placements"})
+        await toolTipCard.getByRole('button', {name: "Top"}).hover()
+
+        page.getByRole('tooltip') //if you have a role tooltip created
+        const toolTip = await page.locator('nb-tooltip').textContent()
+        expect(toolTip).toEqual('This is a tooltip')
+    })
